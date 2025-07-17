@@ -1,7 +1,7 @@
 import { CohereClientV2 } from 'cohere-ai';
 
 const cohere = new CohereClientV2({
-  token: process.env.COHERE_API_KEY?.trim() || '',
+  token: process.env.API_KEY?.trim() || '',
 });
 
 /**

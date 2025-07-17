@@ -16,5 +16,6 @@ model Question {
 model UnansweredQuestion {
   id        Int      @id @default(autoincrement())
   question  String
+  aiAnswer  String?
   createdAt DateTime @default(now())
 }

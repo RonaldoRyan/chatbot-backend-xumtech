@@ -19,7 +19,7 @@ export const chatService = {
     const normalizedQuestions = allQuestions.map(q => normalize(q.question));
     const { bestMatch, bestMatchIndex } = stringSimilarity.findBestMatch(normalizedInput, normalizedQuestions);
 
-    if (bestMatch.rating >= 0.85) {
+    if (bestMatch.rating >= 0.6) {
       return allQuestions[bestMatchIndex].answer;
     }
 

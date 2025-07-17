@@ -12,18 +12,19 @@ export async function main() {
   }
 
   // Si no hay preguntas, insertar las predefinidas
-  const questions = [
-    { question: '¿Cuál es tu nombre?', answer: 'Soy un bot conversacional simple.' },
-    { question: '¿Qué puedes hacer?', answer: 'Puedo responder preguntas predefinidas.' },
-    { question: '¿Cómo te entrenaron?', answer: 'Fui entrenado con un conjunto de datos fijo.' },
-    { question: '¿Cuántos años tienes?', answer: 'No tengo edad, solo soy código.' },
-    { question: '¿Dónde estás alojado?', answer: 'En un servidor backend Express con SQLite.' },
-    { question: '¿Eres inteligente?', answer: 'Solo un poco, respondo 10 preguntas...o puede que un poco más.' },
-    { question: '¿Quién te creó?', answer: 'Fui desarrollado como prueba técnica por Ronaldo Ryan Serrano.' },
-    { question: '¿Puedes aprender?', answer: 'En esta versión no, pero en un futuro sí.' },
-    { question: '¿En que lenguaje estas programado?', answer: 'Mi Backend está creado con Node.js, TypeScript, Express.js, SQLite y Prisma. El Frontend usa React, Next.js y Tailwind.' },
-    { question: '¿Tienes interfaz?', answer: 'Sí, tengo un chat en la web.' }
-  ];
+const questions = [
+  { question: '¿Cuál es tu propósito principal?', answer: 'Estoy diseñado para responder preguntas como parte de una prueba técnica de chatbot evaluativo.' },
+  { question: '¿Qué tecnologías usas en tu arquitectura?', answer: 'Mi backend utiliza Node.js, Express, TypeScript, Prisma y SQLite. El frontend está hecho en Next.js con React y Tailwind CSS.' },
+  { question: '¿Quién desarrolló este sistema?', answer: 'Fui desarrollado por Ronaldo Ryan Serrano como parte de una prueba técnica para Xumtech.' },
+  { question: '¿Tienes conexión con alguna API de inteligencia artificial?', answer: 'Sí, utilizo la API de Cohere para generar respuestas cuando no tengo una respuesta predefinida.' },
+  { question: '¿Dónde se almacenan tus preguntas y respuestas?', answer: 'Uso una base de datos SQLite conectada mediante Prisma ORM para almacenar preguntas predefinidas y no respondidas.' },
+  { question: '¿Cómo decides si respondes tú o la IA?', answer: 'Comparo la similitud de tu mensaje con mis preguntas almacenadas. Si no hay coincidencia suficiente, consulto con Cohere.' },
+  { question: '¿Puedes adaptarte o aprender nuevas preguntas?', answer: 'En esta versión aún no aprendo automáticamente, pero registro cada pregunta no respondida para entrenamiento futuro.' },
+  { question: '¿Qué pasa si no entiendo tu pregunta?', answer: 'Intento generar una respuesta con inteligencia artificial. Si aún así no puedo, te responderé con un mensaje de fallback.' },
+  { question: '¿Este sistema está listo para producción?', answer: 'No completamente. Fue desarrollado como un MVP funcional para una evaluación técnica, pero tiene potencial de escalabilidad.' },
+  { question: '¿Cómo puedo entrenarte con nuevas respuestas?', answer: 'Actualmente solo el backend puede registrar preguntas nuevas. En futuras versiones se podrá entrenar desde la interfaz de usuario.' }
+];
+
 
   for (const q of questions) {
     await prisma.question.create({ data: q });

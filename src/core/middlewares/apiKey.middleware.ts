@@ -17,7 +17,7 @@ export function validateApiKey(req: Request, res: Response, next: NextFunction) 
   const apiKeyHeader = req.headers['x-api-key'] || req.headers['authorization'];
   const apiKeyStr = Array.isArray(apiKeyHeader) ? apiKeyHeader[0] : apiKeyHeader;
 
-  const serverApiKey = process.env.COHERE_API_KEY?.trim();
+  const serverApiKey = process.env.API_KEY?.trim();
 
 
 

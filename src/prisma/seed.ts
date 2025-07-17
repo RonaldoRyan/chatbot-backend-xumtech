@@ -2,24 +2,16 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-/**
- * Inserts a predefined set of questions and answers into the database.
- * Utilizes Prisma to create entries in the `question` table.
- * Logs a success message upon completion.
- *
- * Inserta un conjunto predefinido de preguntas y respuestas en la base de datos.
- * Utiliza Prisma para crear entradas en la tabla `question`.
- * Muestra un mensaje de éxito al finalizar.
- *
- * @async
- * @function main
- * @returns {Promise<void>} A promise that resolves when all questions are inserted.
- */
-async function main() {
-  // 1. Elimina todas las preguntas existentes
-  await prisma.question.deleteMany();
+export async function main() {
+  // Verifica si ya hay preguntas en la BD
+  const count = await prisma.question.count();
 
-  // 2. Inserta las nuevas preguntas
+  if (count > 0) {
+    console.log('✅ Preguntas ya existen en la base de datos. Seed no se ejecuta.');
+    return;
+  }
+
+  // Si no hay preguntas, insertar las predefinidas
   const questions = [
     { question: '¿Cuál es tu nombre?', answer: 'Soy un bot conversacional simple.' },
     { question: '¿Qué puedes hacer?', answer: 'Puedo responder preguntas predefinidas.' },
@@ -37,7 +29,5 @@ async function main() {
     await prisma.question.create({ data: q });
   }
 
-  console.log('✅ Preguntas actualizadas e insertadas');
+  console.log('✅ Preguntas insertadas en la base de datos.');
 }
-
-main().finally(() => prisma.$disconnect());

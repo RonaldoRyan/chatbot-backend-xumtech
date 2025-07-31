@@ -1,6 +1,6 @@
 import { prisma } from '../../../lib/prisma';
 import { callCohere } from '../../../core/helpers/cohere.helper';
-import { getEmbedding, cosineSimilarity } from '../../../core/helpers/embedding.helper';
+import * as embeddingHelper from '../../../core/helpers/embedding.helper';
 import { normalize } from '../utils/text.helper';
 import { isFallbackResponse } from '../utils/aiFallback'; 
 
@@ -12,7 +12,7 @@ export const chatService = {
 
     let inputEmbedding: number[];
     try {
-      inputEmbedding = await getEmbedding(normalizedInput);
+      inputEmbedding = await embeddingHelper.getEmbedding(normalizedInput);
     } catch (error) {
       // EN: Calls fallback AI if embedding generation fails.
       // ES: Llama a la AI de respaldo si falla la generación de embeddings.
@@ -48,7 +48,7 @@ export const chatService = {
       const storedEmbedding = allQuestions[i].embedding as number[] | null;
       if (!storedEmbedding) continue;
 
-      const score = cosineSimilarity(inputEmbedding, storedEmbedding);
+      const score = embeddingHelper.cosineSimilarity(inputEmbedding, storedEmbedding);
       if (score > bestScore) {
         bestScore = score;
         bestMatchIndex = i;
@@ -81,7 +81,7 @@ export const chatService = {
   // ES: Guarda embeddings para una pregunta específica en la base de datos.
   async saveEmbeddingForQuestion(questionId: number, questionText: string): Promise<void> {
     const normalized = normalize(questionText);
-    const embedding = await getEmbedding(normalized);
+    const embedding = await embeddingHelper.getEmbedding(normalized);
 
     await prisma.question.update({
       where: { id: questionId },

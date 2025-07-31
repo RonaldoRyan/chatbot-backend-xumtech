@@ -2,12 +2,20 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "commonjs",
-    "rootDir": "./src",
     "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "types": ["node"]
-  }
+    "types": ["node", "jest"],
+    "baseUrl": "./src",
+    "paths": {
+      "@core/*": ["core/*"],
+      "@lib/*": ["lib/*"],
+      "@modules/*": ["modules/*"],
+      "@utils/*": ["modules/chat/utils/*"],
+      "@test/*": ["test/*"]
+    }
+  },
+  "include": ["src", "jest.config.js", "src/test"]
 }

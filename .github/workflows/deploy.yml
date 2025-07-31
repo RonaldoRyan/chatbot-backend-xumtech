@@ -1,0 +1,49 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    name: 🧪 Test & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm install
+
+      - name: 🔍 Run tests
+        run: npm test
+
+      - name: 🧪 Upload coverage to Codecov
+        if: success()
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+        continue-on-error: true
+
+  deploy:
+    name: 🚀 Deploy to Render
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && success()
+
+    steps:
+      - name: 🧾 Trigger Render Deploy
+        run: |
+          curl -X POST https://api.render.com/deploy/srv-d1s3juemcj7s73a2j2vg?key=Pb9Jif2Sra8
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"

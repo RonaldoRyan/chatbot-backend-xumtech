@@ -1,17 +1,19 @@
 import { PrismaClient } from '@prisma/client';
+import { getEmbedding } from '../core/helpers/embedding.helper';
 
 const prisma = new PrismaClient();
 
-export async function main() {
-  // Verifica si ya hay preguntas en la BD
-  const count = await prisma.question.count();
-
-  if (count > 0) {
-    console.log('✅ Preguntas ya existen en la base de datos. Seed no se ejecuta.');
-    return;
-  }
-
-  // Si no hay preguntas, insertar las predefinidas
+/**
+ * @file Seed data for predefined questions and answers used in the chatbot system.
+ * 
+ * @description
+ * EN: Contains a list of predefined questions and answers for the chatbot's initial setup.
+ * ES: Contiene una lista de preguntas y respuestas predefinidas para la configuración inicial del chatbot.
+ * 
+ * @usage
+ * EN: This data is used to populate the database with default questions and answers.
+ * ES: Estos datos se utilizan para poblar la base de datos con preguntas y respuestas predeterminadas.
+ */
 const questions = [
   { question: '¿Cuál es tu propósito principal?', answer: 'Estoy diseñado para responder preguntas como parte de una prueba técnica de chatbot evaluativo.' },
   { question: '¿Qué tecnologías usas en tu arquitectura?', answer: 'Mi backend utiliza Node.js, Express, TypeScript, Prisma y SQLite. El frontend está hecho en Next.js con React y Tailwind CSS.' },
@@ -25,10 +27,35 @@ const questions = [
   { question: '¿Cómo puedo entrenarte con nuevas respuestas?', answer: 'Actualmente solo el backend puede registrar preguntas nuevas. En futuras versiones se podrá entrenar desde la interfaz de usuario.' }
 ];
 
-
+/**
+ * Inserts questions into the database with their embeddings.
+ * Utilizes the `getEmbedding` function to generate embeddings for each question.
+ */
+export async function main() {
   for (const q of questions) {
-    await prisma.question.create({ data: q });
+    const embedding = await getEmbedding(q.question); // ← obtenemos embedding desde Cohere u otra IA
+
+    await prisma.question.upsert({
+      where: { question: q.question },
+      update: {}, // no actualizamos si ya existe
+      create: {
+        question: q.question,
+        answer: q.answer,
+        embedding: embedding as any // Asegúrate de que el tipo en Prisma sea JSON
+      }
+    });
+
+    console.log(`✅ Pregunta insertada: ${q.question}`);
   }
 
-  console.log('✅ Preguntas insertadas en la base de datos.');
+  console.log("✔️ Seed ejecutado sin duplicados");
 }
+
+main()
+  .catch((e) => {
+    console.error("❌ Error al ejecutar el seed:", e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

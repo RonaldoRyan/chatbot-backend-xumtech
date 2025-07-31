@@ -1,5 +1,3 @@
-import { CorsOptions } from 'cors';
-
 export const corsOptions = {
   origin: [
     'http://localhost:3000', // para desarrollo local

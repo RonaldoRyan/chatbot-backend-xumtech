@@ -44,6 +44,13 @@ jobs:
 
     steps:
       - name: 🧾 Trigger Render Deploy
+        id: deploy
         run: |
-          curl -X POST https://api.render.com/deploy/srv-d1s3juemcj7s73a2j2vg?key=Pb9Jif2Sra8
-            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
+          response=$(curl -s -o /dev/null -w "%{http_code}" -X POST https://api.render.com/deploy/srv-d1s3juemcj7s73a2j2vg \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            -H "Accept: application/json")
+          echo "Response status: $response"
+          if [[ "$response" != "200" ]]; then
+            echo "Error: Deploy trigger failed with status $response"
+            exit 1
+          fi

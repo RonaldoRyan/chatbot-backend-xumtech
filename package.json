@@ -7,7 +7,6 @@
     "test": "jest",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "tsc",
-    "postinstall": "prisma generate && prisma migrate deploy",
     "seed": "ts-node-dev src/prisma/seed.ts"
   },
   "keywords": [],

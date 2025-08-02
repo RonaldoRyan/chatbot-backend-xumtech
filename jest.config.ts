@@ -1,4 +1,3 @@
-
 import type { Config } from 'jest';
 
 const config: Config = {
@@ -13,7 +12,7 @@ const config: Config = {
     '^@utils/(.*)$': '<rootDir>/modules/chat/utils/$1',
     '^@test/(.*)$': '<rootDir>/test/$1',
   },
-  setupFiles: [],
+  setupFiles: ['dotenv/config'],  // <--- aquí
 };
 
 export default config;

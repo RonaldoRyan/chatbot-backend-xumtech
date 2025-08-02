@@ -3,6 +3,8 @@ node_modules/
 
 # Build output
 dist/
+*.js
+!vite.config.js
 
 # Environment variables
 .env

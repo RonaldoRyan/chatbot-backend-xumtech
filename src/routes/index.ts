@@ -1,10 +1,10 @@
-import { Router } from 'express';
-import chatRoutes from '../modules/chat/routes/chat.router';
-import adminRoutes from '../modules/admin/routes/admin.routes';
+import { Router } from 'express'
+import chatRoutes from '../modules/chat/routes/chat.router'
+import adminRoutes from '../modules/admin/routes/admin.routes'
 
-const router = Router();
+const router = Router()
 
-router.use('/chat', chatRoutes);
-router.use('/admin', adminRoutes);
+router.use('/chat', chatRoutes)
+router.use('/admin', adminRoutes)
 
-export default router;
+export default router

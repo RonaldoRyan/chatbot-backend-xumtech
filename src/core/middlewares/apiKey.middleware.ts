@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express'
 
 /**
  * Validates the API key provided in the request headers.
@@ -14,16 +14,14 @@ import { Request, Response, NextFunction } from 'express';
 
  */
 export function validateApiKey(req: Request, res: Response, next: NextFunction) {
-  const apiKeyHeader = req.headers['x-api-key'] || req.headers['authorization'];
-  const apiKeyStr = Array.isArray(apiKeyHeader) ? apiKeyHeader[0] : apiKeyHeader;
+  const apiKeyHeader = req.headers['x-api-key'] || req.headers['authorization']
+  const apiKeyStr = Array.isArray(apiKeyHeader) ? apiKeyHeader[0] : apiKeyHeader
 
-  const serverApiKey = process.env.API_KEY?.trim();
-
-
+  const serverApiKey = process.env.API_KEY?.trim()
 
   if (!apiKeyStr || apiKeyStr !== serverApiKey) {
-    return res.status(401).json({ message: 'Unauthorized' });
+    return res.status(401).json({ message: 'Unauthorized' })
   }
 
-  next();
+  next()
 }

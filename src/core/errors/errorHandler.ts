@@ -1,22 +1,39 @@
-import { Request, Response, NextFunction } from 'express';
-
+import { Request, Response, NextFunction } from 'express'
+import { CustomError } from '@modules/chat/interfaces/custom.error'
 
 
 /**
- * Handles errors that occur during the request-response cycle.
- * Logs the error to the console and sends an appropriate HTTP response.
+ * Global error handler middleware for Express.
  * 
- * Maneja los errores que ocurren durante el ciclo de solicitud-respuesta.
- * Registra el error en la consola y envía una respuesta HTTP adecuada.
+ * Catches any error thrown in the application, logs it to the console,
+ * and sends a JSON response with an appropriate HTTP status code and message.
+ * If the error includes a custom status or message, those are used;
+ * otherwise, it defaults to 500 Internal Server Error.
  * 
- * @param err - The error object containing details about the error. / El objeto de error que contiene detalles sobre el error.
- * @param _req - The incoming HTTP request object (unused). / El objeto de solicitud HTTP entrante (no utilizado).
- * @param res - The HTTP response object used to send the error response. / El objeto de respuesta HTTP utilizado para enviar la respuesta de error.
- * @param _next - The next middleware function in the stack (unused). / La siguiente función de middleware en la pila (no utilizada).
+ * Middleware global para manejo de errores en Express.
+ * 
+ * Captura cualquier error lanzado en la aplicación, lo registra en consola
+ * y envía una respuesta JSON con el código de estado HTTP y mensaje adecuados.
+ * Si el error incluye un estado o mensaje personalizado, se usan esos valores;
+ * de lo contrario, retorna 500 Internal Server Error por defecto.
  */
-export function errorHandler(err: any, _req: Request, res: Response, _next: NextFunction) {
-  console.error('Error:', err);
-  res.status(err.status || 500).json({
-    message: err.message || 'Internal Server Error'
-  });
+
+export function errorHandler(err: unknown, _req: Request, res: Response, _next: NextFunction) {
+  console.error('Error:', err)
+
+  let status = 500
+  let message = 'Internal Server Error'
+
+  if (typeof err === 'object' && err !== null) {
+    const error = err as Partial<CustomError>
+
+    if (typeof error.status === 'number') {
+      status = error.status
+    }
+
+    if (typeof error.message === 'string') {
+      message = error.message
+    }
+  }
+  res.status(status).json({ message })
 }

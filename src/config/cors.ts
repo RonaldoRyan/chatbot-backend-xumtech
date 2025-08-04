@@ -7,4 +7,4 @@ export const corsOptions = {
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'x-api-key'],
   credentials: false,
-};
+}

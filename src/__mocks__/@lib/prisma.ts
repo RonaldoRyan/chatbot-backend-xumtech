@@ -5,4 +5,4 @@ export const prisma = {
   unansweredQuestion: {
     create: jest.fn(),
   },
-};
+}

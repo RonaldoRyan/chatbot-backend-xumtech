@@ -1,4 +1,4 @@
-import type { Config } from 'jest';
+import type { Config } from 'jest'
 
 const config: Config = {
   preset: 'ts-jest',
@@ -12,7 +12,7 @@ const config: Config = {
     '^@utils/(.*)$': '<rootDir>/modules/chat/utils/$1',
     '^@test/(.*)$': '<rootDir>/test/$1',
   },
-  setupFiles: ['dotenv/config'],  // <--- aquí
-};
+  setupFiles: ['dotenv/config'], // <--- aquí
+}
 
-export default config;
+export default config

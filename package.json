@@ -4,10 +4,30 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "test": "jest",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "tsc",
-    "seed": "ts-node-dev src/prisma/seed.ts"
+    "lint": "eslint src/ --ext .ts",
+    "lint:fix": "eslint src/ --ext .ts --fix",
+    "lint:report": "eslint . --ext .ts --format=json --output-file=eslint-report.json",
+    "format:check": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "code:fix": "npm run lint:fix && npm run format",
+    "code:check": "npm run lint && npm run format:check",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:ci": "jest --ci --coverage --watchAll=false",
+    "db:generate": "npx prisma generate",
+    "db:migrate": "npx prisma migrate dev",
+    "db:deploy": "npx prisma migrate deploy",
+    "db:seed": "npx prisma db seed",
+    "db:reset": "npx prisma migrate reset",
+    "seed": "ts-node-dev src/prisma/seed.ts",
+    "check:all": "npm run code:check && npm run test && npx tsc --noEmit",
+    "quality": "npm run code:fix && npm run test:coverage",
+    "audit:fix": "npm audit fix",
+    "audit:check": "npm audit --audit-level=high",
+    "pre-deploy": "npm run check:all && npm run build"
   },
   "keywords": [],
   "author": "",
@@ -32,9 +52,17 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^24.0.14",
     "@types/string-similarity": "^4.0.2",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
+    "eslint": "^9.32.0",
+    "eslint-config-prettier": "^10.1.8",
     "jest": "^30.0.5",
+    "prettier": "^3.6.2",
     "ts-jest": "^29.4.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
+  },
+  "prisma": {
+    "seed": "ts-node src/prisma/seed.ts"
   }
 }

@@ -1,4 +1,4 @@
-import { cohereClient } from './cohere.helper';
+import { cohereClient } from './cohere.helper'
 
 /**
  * Retrieves the embedding vector for a given text using the Cohere API.
@@ -17,27 +17,27 @@ export async function getEmbedding(text: string): Promise<number[]> {
       model: 'small',
       inputType: 'search_query',
       texts: [text],
-      embeddingTypes: ['float']
-    });
+      embeddingTypes: ['float'],
+    })
 
     if (
       !response.embeddings ||
       !response.embeddings.float ||
       response.embeddings.float.length === 0
     ) {
-      throw new Error('No se pudo obtener el embedding de la respuesta de Cohere.');
+      throw new Error('No se pudo obtener el embedding de la respuesta de Cohere.')
     }
 
-    return response.embeddings.float[0];
+    return response.embeddings.float[0]
   } catch (error) {
-    console.error('Error al obtener embedding:', error);
-    throw error;
+    console.error('Error al obtener embedding:', error)
+    throw error
   }
 }
 
 export function cosineSimilarity(vecA: number[], vecB: number[]): number {
-  const dot = vecA.reduce((sum, a, i) => sum + a * vecB[i], 0);
-  const magA = Math.sqrt(vecA.reduce((sum, a) => sum + a * a, 0));
-  const magB = Math.sqrt(vecB.reduce((sum, b) => sum + b * b, 0));
-  return dot / (magA * magB);
+  const dot = vecA.reduce((sum, a, i) => sum + a * vecB[i], 0)
+  const magA = Math.sqrt(vecA.reduce((sum, a) => sum + a * a, 0))
+  const magB = Math.sqrt(vecB.reduce((sum, b) => sum + b * b, 0))
+  return dot / (magA * magB)
 }

@@ -5,11 +5,14 @@ on:
     branches:
       - feature/embeddings
       - test
+      - chore/setup/eslint-prettier
       - main
+
   pull_request:
     branches:
       - feature/embeddings
       - test
+      - chore/setup/eslint-prettier
       - main
 
 jobs:

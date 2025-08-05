@@ -26,8 +26,8 @@ export async function callCohere(prompt: string): Promise<string | null> {
     if (Array.isArray(content)) {
       const texts = content
         // Filter out non-text items and join the text content / Filtra los elementos que no son texto y une el contenido de texto
-        .filter((item) => item.type === 'text' && typeof item.text === 'string')
-        .map((item) => item.text)
+        .filter(item => item.type === 'text' && typeof item.text === 'string')
+        .map(item => item.text)
 
       aiMessage = texts.join(' ').trim()
     }

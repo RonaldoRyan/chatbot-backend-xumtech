@@ -92,7 +92,7 @@ export async function main() {
 }
 
 main()
-  .catch((e) => {
+  .catch(e => {
     console.error('❌ Error al ejecutar el seed:', e)
     process.exit(1)
   })

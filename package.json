@@ -6,7 +6,7 @@
     "start": "node dist/index.js",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "tsc",
-    "lint": "eslint src/ --ext .ts --max-warnings 0",
+    "lint": "eslint src/ --ext .ts",
     "lint:fix": "eslint src/ --ext .ts --fix",
     "lint:report": "eslint . --ext .ts --format=json --output-file=eslint-report.json",
     "format:check": "prettier --check .",

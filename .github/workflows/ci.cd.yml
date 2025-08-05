@@ -38,9 +38,6 @@ jobs:
       - name: Format all files
         run: npx prettier --write .
 
-      - name: Show git diff
-        run: git diff
-
       - name: Run Prettier check
         run: npm run format:check
 

@@ -27,13 +27,21 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 22.x
-          cache: 'npm'
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
 
-      # Verificar formato de Prettier PRIMERO (más rápido)
-      - name: Check Prettier formatting
+      - name: Check Prettier version
+        run: npx prettier --version
+
+      - name: Format all files
+        run: npx prettier --write .
+
+      - name: Show git diff
+        run: git diff
+
+      - name: Run Prettier check
         run: npm run format:check
 
       # Luego ESLint (más lento)
@@ -49,8 +57,8 @@ jobs:
         if: failure()
         uses: ataylorme/eslint-annotate-action@v2
         with:
-          repo-token: '${{ secrets.GITHUB_TOKEN }}'
-          report-json: 'eslint-report.json'
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          report-json: "eslint-report.json"
 
   # Job de testing con matriz de Node.js
   test:
@@ -72,7 +80,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
@@ -84,12 +92,12 @@ jobs:
       - name: Run migrations for testing
         run: npx prisma migrate deploy
         env:
-          DATABASE_URL: 'file:./test.db'
+          DATABASE_URL: "file:./test.db"
 
       - name: Run seed script
         run: npx prisma db seed
         env:
-          DATABASE_URL: 'file:./test.db'
+          DATABASE_URL: "file:./test.db"
 
       - name: Run tests with coverage
         run: npm run test:coverage
@@ -113,7 +121,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 22.x
-          cache: 'npm'
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci

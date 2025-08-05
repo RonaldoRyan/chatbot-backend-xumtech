@@ -40,7 +40,7 @@ export default [
     },
     rules: {
       // === FASE 1: Solo errores críticos ===
-      '@typescript-eslint/no-unused-vars': ['warn', { "argsIgnorePattern": "^_" }],
+      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-floating-promises': 'warn',
 

@@ -1,17 +1,16 @@
 import { Request, Response, NextFunction } from 'express'
 import { CustomError } from '@modules/chat/interfaces/custom.error'
 
-
 /**
  * Global error handler middleware for Express.
- * 
+ *
  * Catches any error thrown in the application, logs it to the console,
  * and sends a JSON response with an appropriate HTTP status code and message.
  * If the error includes a custom status or message, those are used;
  * otherwise, it defaults to 500 Internal Server Error.
- * 
+ *
  * Middleware global para manejo de errores en Express.
- * 
+ *
  * Captura cualquier error lanzado en la aplicación, lo registra en consola
  * y envía una respuesta JSON con el código de estado HTTP y mensaje adecuados.
  * Si el error incluye un estado o mensaje personalizado, se usan esos valores;

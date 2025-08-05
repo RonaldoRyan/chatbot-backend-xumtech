@@ -66,7 +66,7 @@ jobs:
       matrix:
         node-version: [18.x, 22.x]
       fail-fast: false # Continuar con otras versiones si una falla
-    env:
+    env:  
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       API_KEY: ${{ secrets.API_KEY }}
       RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
@@ -89,12 +89,12 @@ jobs:
       - name: Run migrations for testing
         run: npx prisma migrate deploy
         env:
-          DATABASE_URL: "file:./test.db"
+          DATABASE_URL: ${{  secrets.DATABASE_URL }}
 
       - name: Run seed script
         run: npx prisma db seed
         env:
-          DATABASE_URL: "file:./test.db"
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Run tests with coverage
         run: npm run test:coverage

@@ -64,7 +64,7 @@ jobs:
     needs: code-quality
     strategy:
       matrix:
-        node-version: [18.x, 22.x]
+        node-version: [ 22.x]
       fail-fast: false # Continuar con otras versiones si una falla
     env:  
       DATABASE_URL: ${{ secrets.DATABASE_URL }}

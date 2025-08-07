@@ -73,7 +73,7 @@ const questions = [
  */
 export async function main() {
   for (const q of questions) {
-    const embedding = await getEmbedding(q.question) // ← obtenemos embedding desde Cohere u otra IA
+    const embedding = await getEmbedding(q.question) //obtenemos embedding desde Cohere u otra IA
 
     await prisma.question.upsert({
       where: { question: q.question },
@@ -81,7 +81,7 @@ export async function main() {
       create: {
         question: q.question,
         answer: q.answer,
-        embedding: embedding as any, // Asegúrate de que el tipo en Prisma sea JSON
+        embedding: embedding as any, 
       },
     })
 

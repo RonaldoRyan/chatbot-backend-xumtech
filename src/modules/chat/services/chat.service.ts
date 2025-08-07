@@ -57,7 +57,7 @@ export const chatService = {
 
     // EN: Returns the best match if similarity score is high enough.
     // ES: Devuelve la mejor coincidencia si el puntaje de similitud es suficientemente alto.
-    if (bestScore >= 0.75 && bestMatchIndex !== -1) {
+    if (bestScore >= 0.55 && bestMatchIndex !== -1) {
       return allQuestions[bestMatchIndex].answer
     }
 

@@ -1,8 +1,10 @@
 import express from 'express'
 import cors from 'cors'
 import routes from './routes'
+import unansweredRoutes from './modules/chat/routes/unanswereds.route'
 import { main as seed } from './prisma/seed'
 import { errorHandler } from './core/errors/errorHandler'
+import { authController } from '@modules/auth/controllers/auth.controller'  
 import { corsOptions } from './config/cors'
 import { config } from 'dotenv'
 
@@ -24,6 +26,7 @@ async function startServer() {
 
     // Rutas principales
     app.use('/api', routes)
+    
 
     // Manejador de errores
     app.use(errorHandler)

@@ -1,7 +1,15 @@
-# 🤖 Chatbot Backend Fullstack LLM
 
-Backend del **chatbot conversacional** desarrollado para soporte / asistente administrativo y POC de integración de IA.  
-Responde preguntas desde una base de datos (preguntas predefinidas + embeddings) y utiliza Cohere como fallback cuando no encuentra coincidencias. También registra preguntas no respondidas para entrenamiento/manual review.
+
+
+
+
+# 🤖 Chatbot Backend - Evaluación Técnica Xumtech
+
+Este es el backend de un **mini chatbot conversacional** desarrollado como parte
+de una evaluación técnica para Xumtech. Responde preguntas desde una base de
+datos y utiliza inteligencia artificial mediante Cohere cuando no encuentra
+coincidencias. Permite registrar preguntas no comprendidas para entrenamiento
+posterior.
 
 ---
 

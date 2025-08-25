@@ -5,6 +5,6 @@ export const corsOptions = {
     'https://chatbot-frontend-xumtech-7l7k.vercel.app', // dominio de build temporal
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'x-api-key'],
+  allowedHeaders: ['Content-Type', 'x-api-key', 'Authorization'],
   credentials: false,
 }

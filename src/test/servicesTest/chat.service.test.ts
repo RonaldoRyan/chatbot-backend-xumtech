@@ -10,9 +10,9 @@ describe('chatService.findAnswer', () => {
   afterEach(() => jest.clearAllMocks())
 
   it('debe retornar la respuesta correcta desde el seed si hay match real en BD', async () => {
-    const result = await chatService.findAnswer('¿Cuál es tu propósito principal?')
+    const result = await chatService.findAnswer('¿Qué arquitectura es recomendable para un chatbot moderno?')
     expect(result).toBe(
-      'Estoy diseñado para responder preguntas como parte de una prueba técnica de chatbot evaluativo.'
+      'Una arquitectura modular y escalable, separando frontend (React/Next.js), backend (Node.js/Express), lógica de IA (LLMs y embeddings), y base de datos, facilitando mantenimiento y despliegues CI/CD.'
     )
   })
 

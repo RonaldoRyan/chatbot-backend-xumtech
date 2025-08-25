@@ -1,0 +1,12 @@
+-- Insertar preguntas y respuestas iniciales
+INSERT INTO "Question" (question, answer, embedding) VALUES
+('¿Qué es Git y para qué se usa?', 'Git es un sistema de control de versiones que permite llevar un historial de cambios en el código, colaborar en equipo y gestionar diferentes ramas de desarrollo de manera eficiente.', NULL),
+('¿Qué es GitHub Actions?', 'GitHub Actions es una herramienta de automatización que permite configurar CI/CD, tests y despliegues automáticos directamente desde tu repositorio de GitHub.', NULL),
+('¿Qué son embeddings en inteligencia artificial?', 'Los embeddings son representaciones numéricas de datos (como texto) que permiten a los modelos de IA comparar similitudes, buscar información y realizar tareas de NLP de manera eficiente.', NULL),
+('¿Qué es un LLM y cómo se implementa?', 'Un LLM (Large Language Model) es un modelo de lenguaje entrenado con grandes cantidades de texto. Se implementa integrando APIs de servicios de IA, generando respuestas contextuales y, opcionalmente, usando embeddings para mejorar precisión.', NULL),
+('¿Qué tipo de bases de datos se pueden usar con un chatbot?', 'Se pueden usar bases de datos SQL como MySQL o PostgreSQL para almacenar estructuras relacionales, o NoSQL como MongoDB para datos flexibles, dependiendo de la necesidad de consultas y escalabilidad.', NULL),
+('¿Quién diseñó este chatbot?', 'Este chatbot fue diseñado por Ronaldo Ryan, Fullstack Developer, como demostración de integración de LLMs, bases de datos y frontend moderno.', NULL),
+('¿Por qué usar Node.js para el backend de un chatbot?', 'Node.js permite manejar múltiples conexiones simultáneas de manera eficiente, gracias a su arquitectura basada en eventos y su ecosistema amplio para APIs, integraciones y desarrollo rápido.', NULL),
+('¿Qué son patrones de diseño y por qué son importantes?', 'Los patrones de diseño son soluciones reutilizables a problemas comunes de software. Ayudan a mejorar mantenibilidad, escalabilidad y consistencia en la arquitectura de proyectos.', NULL),
+('¿Qué buenas prácticas se deben seguir en desarrollo de software?', 'Algunas buenas prácticas incluyen: código limpio y modular, uso de control de versiones, pruebas automatizadas, documentación clara, seguridad y principios SOLID en arquitectura.', NULL),
+('¿Qué arquitectura es recomendable para un chatbot moderno?', 'Una arquitectura modular y escalable, separando frontend (React/Next.js), backend (Node.js/Express), lógica de IA (LLMs y embeddings), y base de datos, facilitando mantenimiento y despliegues CI/CD.', NULL);

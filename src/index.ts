@@ -2,7 +2,6 @@ import express from 'express'
 import cors from 'cors'
 import routes from './routes'
 import unansweredRoutes from './modules/chat/routes/unanswereds.route'
-import { main as seed } from './prisma/seed'
 import { errorHandler } from './core/errors/errorHandler'
 import { authController } from '@modules/auth/controllers/auth.controller'  
 import { corsOptions } from './config/cors'
@@ -16,9 +15,6 @@ const PORT = process.env.PORT || 3001
 // Función async para arrancar app después de seed
 async function startServer() {
   try {
-    console.log('Ejecutando seed de base de datos...')
-    await seed()
-    console.log('Seed ejecutado correctamente.')
 
     // Middlewares
     app.use(cors(corsOptions))

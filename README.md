@@ -1,15 +1,6 @@
+# 🤖 Chatbot Backend - Fullstack LLM Chatbot
 
 
-
-
-
-# 🤖 Chatbot Backend - Evaluación Técnica Xumtech
-
-Este es el backend de un **mini chatbot conversacional** desarrollado como parte
-de una evaluación técnica para Xumtech. Responde preguntas desde una base de
-datos y utiliza inteligencia artificial mediante Cohere cuando no encuentra
-coincidencias. Permite registrar preguntas no comprendidas para entrenamiento
-posterior.
 
 ---
 

@@ -20,3 +20,4 @@ CREATE TABLE "UnansweredQuestion" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Question_question_key" ON "Question"("question");
+

@@ -18,16 +18,24 @@ export const unansweredService = {
       throw new AppError('Pregunta no encontrada', 404)
     }
 
+    // **Validación de respuesta vacía o nula**
+    if (!answer || !answer.trim()) {
+      throw new AppError('La respuesta no puede estar vacía', 400)
+    }
+
+    // Obtener embedding de la pregunta
     const embedding = await embeddingHelper.getEmbedding(unanswered.question)
 
+    // Guardar en tabla de preguntas respondidas
     await prisma.question.create({
       data: {
         question: unanswered.question,
-        answer,
+        answer: answer.trim(),
         embedding
       }
     })
 
+    // Eliminar de unanswered
     await prisma.unansweredQuestion.delete({
       where: { id }
     })
